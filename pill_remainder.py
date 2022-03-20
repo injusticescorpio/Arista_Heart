@@ -1,4 +1,3 @@
-import re
 from datetime import datetime
 class Pillremainder:
     def __init__(self,days,medine_details):
