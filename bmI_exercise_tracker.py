@@ -8,7 +8,7 @@ class BMI:
     def __init__(self,height,weight):
         self.headers = {
     "X-RapidAPI-Host": "body-mass-index-bmi-calculator.p.rapidapi.com",
-    "X-RapidAPI-Key": os.environ['bmi_calculate_key']
+    "X-RapidAPI-Key": os.environ['secret_key']
 }
         self.weight_details={
 
