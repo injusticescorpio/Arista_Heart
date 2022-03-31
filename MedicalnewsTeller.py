@@ -12,7 +12,7 @@ def Medi_news():
         'category': 'health',
         'language': 'en',
         'country': 'in',
-        'apiKey': '0650237c3f21411ea4f27185f0747e09'
+        'apiKey': 'API-KEY'
     }
 
 
