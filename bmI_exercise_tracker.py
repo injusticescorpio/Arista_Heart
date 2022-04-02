@@ -5,15 +5,17 @@ import webbrowser
 import sqlite3
 
 class BMI_Information_Store:
-    def __init__(self,name=None,bmi=None):
+    def __init__(self,name=None,bmi=None,weight=None):
         self.name = name
         self.bmi = bmi
+        self.weight =weight
         self.conn = sqlite3.connect('bmi_info.db')
         self.curr = self.conn.cursor()
     def create_table(self):
         self.curr.execute("""CREATE TABLE BMI (
                     name text not null,
-                     bmi integer NOT NULL
+                     bmi integer NOT NULL,
+                     weight integer NOT NULL
                     )""")
     def retrieve_all_details(self):
         self.curr.execute("""SELECT * from BMI""")
@@ -24,14 +26,14 @@ class BMI_Information_Store:
     def insert_details(self):
         if self.name is not None and self.bmi is not None:
             with self.conn:
-                self.curr.execute("INSERT INTO BMI VALUES (:name, :bmi)",
-                        {'name': self.name, 'bmi': self.bmi})
+                self.curr.execute("INSERT INTO BMI VALUES (:name, :bmi, :weight)",
+                        {'name': self.name.title(), 'bmi': self.bmi,"weight": self.weight})
     def update_defails(self):
         if self.name is not None and self.bmi is not None:
             with self.conn:
-                self.curr.execute("""UPDATE BMI SET bmi = :bmi
+                self.curr.execute("""UPDATE BMI SET bmi = :bmi, weight = :weight
                             WHERE name = :name""",
-                          {'name': self.name, 'bmi': self.bmi})
+                          {'name': self.name.title(), 'bmi': self.bmi,'weight':self.weight})
     def check_table_exists(self):
         bmi_table=self.curr.execute(
             """SELECT name FROM sqlite_master WHERE type='table'
@@ -83,21 +85,21 @@ class BMI:
         else:
             self.play_video('https://www.youtube.com/watch?v=K-Ch9kbtLYQ')
     def store_details(self):
-        bmi_details = BMI_Information_Store(self.name,self.bmi)
+        bmi_details = BMI_Information_Store(self.name,self.bmi,self.weight)
         if not bmi_details.check_table_exists():
             bmi_details.create_table()
         if bmi_details.retrieve_user_details(self.name)==[]:
             bmi_details.insert_details()
         else:
             bmi_details.update_defails()
-bmi=BMI('arjun',80,1.94)
+bmi=BMI('Arjun',80,1.94)
 print(f"bmi of {bmi.name} is {bmi.bmi_calculation()}")
 bmi.store_details()
-bmi1=BMI('dennis',60,1.78)
+bmi1=BMI('Dennis',60,1.78)
 print(f"bmi of {bmi1.name} is {bmi1.bmi_calculation()}")
 bmi1.store_details()
 details=BMI_Information_Store()
-print(details.retrieve_user_details('arjun'))
+print(details.retrieve_user_details('Arjun'))
 print(details.retrieve_all_details())
 # print(bmi.weight_category())
 # bmi.play_category()

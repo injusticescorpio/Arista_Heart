@@ -9,7 +9,7 @@ url="https://www.google.co.in/search?q="
 class Calorie_Details:
     def __init__(self,query):
         self.query =query
-        self.search=url+self.query
+        self.search=url+self.query+' calories'
     def calorie_info(self):
         page = requests.get(self.search, headers=headers)
         soup = BeautifulSoup(page.content, 'html.parser')
@@ -34,7 +34,8 @@ class Calorie_Details:
                             result = "Unable to find your result I think there's some problem with your input :) Sorry for that"
                     except:
                         try:
-                            pass
+                            nutrition=Nutrition_Info(self.query)
+                            result=nutrition.calorie_information()
                         except:
                             result="Unable to find your result I think there's some problem with your input :) Sorry for that"
         return result
@@ -44,6 +45,6 @@ class Calorie_Details:
         return res if res!="" else "Unable to find the desired result I think there's some problem with our server'"
 
 
-c=Calorie_Details('idli calories')
+c=Calorie_Details('1 litre of apple juice')
 print(c.calorie_info())
 print(c.nutrition_info())
