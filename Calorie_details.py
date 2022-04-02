@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+from nutrition_info import Nutrition_Info
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36'
 }
@@ -23,8 +23,27 @@ class Calorie_Details:
                 try:
                     result = soup.find("div", class_='IZ6rdc').get_text()
                 except:
-                    result="Unable to find your result I think there's some problem with your input :) Sorry for that"
+                    try:
+                        result1 = soup.find("div", class_='webanswers-webanswers_table__webanswers-table')
+                        li = [i.text for i in result1.findAll("td")]
+                        for i in li:
+                            if 'cal' in i:
+                                result= i
+                                break
+                        if result is None:
+                            result = "Unable to find your result I think there's some problem with your input :) Sorry for that"
+                    except:
+                        try:
+                            pass
+                        except:
+                            result="Unable to find your result I think there's some problem with your input :) Sorry for that"
         return result
     def nutrition_info(self):
-        pass
+        nutrition=Nutrition_Info(self.query)
+        res=nutrition.nutrition_info()
+        return res if res!="" else "Unable to find the desired result I think there's some problem with our server'"
 
+
+c=Calorie_Details('idli calories')
+print(c.calorie_info())
+print(c.nutrition_info())

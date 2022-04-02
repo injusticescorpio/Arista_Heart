@@ -2,10 +2,45 @@
 import requests
 import os
 import webbrowser
+import sqlite3
+
+class BMI_Information_Store:
+    def __init__(self,name=None,bmi=None):
+        self.name = name
+        self.bmi = bmi
+        self.conn = sqlite3.connect('bmi_info.db')
+        self.curr = self.conn.cursor()
+    def create_table(self):
+        self.curr.execute("""CREATE TABLE BMI (
+                    name text not null,
+                     bmi integer NOT NULL
+                    )""")
+    def retrieve_all_details(self):
+        self.curr.execute("""SELECT * from BMI""")
+        return self.curr.fetchall()
+    def retrieve_user_details(self,name):
+        self.curr.execute("SELECT * FROM BMI WHERE name=:name", {'name': name})
+        return self.curr.fetchall()
+    def insert_details(self):
+        if self.name is not None and self.bmi is not None:
+            with self.conn:
+                self.curr.execute("INSERT INTO BMI VALUES (:name, :bmi)",
+                        {'name': self.name, 'bmi': self.bmi})
+    def update_defails(self):
+        if self.name is not None and self.bmi is not None:
+            with self.conn:
+                self.curr.execute("""UPDATE BMI SET bmi = :bmi
+                            WHERE name = :name""",
+                          {'name': self.name, 'bmi': self.bmi})
+    def check_table_exists(self):
+        bmi_table=self.curr.execute(
+            """SELECT name FROM sqlite_master WHERE type='table'
+            AND name='BMI'; """).fetchall()
+        return True if bmi_table!=[] else False
 
 
 class BMI:
-    def __init__(self,height,weight):
+    def __init__(self,name,weight,height):
         self.headers = {
     "X-RapidAPI-Host": "body-mass-index-bmi-calculator.p.rapidapi.com",
     "X-RapidAPI-Key": os.environ['secret_key']
@@ -19,8 +54,9 @@ class BMI:
 
 
         }
+        self.name = name
+        self.weight = weight
         self.height=height
-        self.weight=weight
 
     def bmi_calculation(self):
         url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric"
@@ -28,7 +64,7 @@ class BMI:
         querystring = {"weight": self.weight, "height": self.height}
         # os.environ['bmi_calculate_key']
 
-        self.bmi = requests.request("GET", url, headers=self.headers, params=querystring).json()['bmi']
+        self.bmi = round(requests.request("GET", url, headers=self.headers, params=querystring).json()['bmi'],1)
         return f"Your BMI is {self.bmi}"
 
     def weight_category(self):
@@ -46,14 +82,25 @@ class BMI:
             self.play_video('https://www.youtube.com/watch?v=W45EUSMnlpg')
         else:
             self.play_video('https://www.youtube.com/watch?v=K-Ch9kbtLYQ')
-
-
-
-
-bmi=BMI(1.94,80)
-print(bmi.bmi_calculation())
-print(bmi.weight_category())
-bmi.play_category()
+    def store_details(self):
+        bmi_details = BMI_Information_Store(self.name,self.bmi)
+        if not bmi_details.check_table_exists():
+            bmi_details.create_table()
+        if bmi_details.retrieve_user_details(self.name)==[]:
+            bmi_details.insert_details()
+        else:
+            bmi_details.update_defails()
+bmi=BMI('arjun',80,1.94)
+print(f"bmi of {bmi.name} is {bmi.bmi_calculation()}")
+bmi.store_details()
+bmi1=BMI('dennis',60,1.78)
+print(f"bmi of {bmi1.name} is {bmi1.bmi_calculation()}")
+bmi1.store_details()
+details=BMI_Information_Store()
+print(details.retrieve_user_details('arjun'))
+print(details.retrieve_all_details())
+# print(bmi.weight_category())
+# bmi.play_category()
 
 
 
