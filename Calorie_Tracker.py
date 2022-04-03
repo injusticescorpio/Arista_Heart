@@ -7,7 +7,7 @@ https://www.medicinenet.com/how_to_calculate_calorie_deficit_for_weight_loss/art
 from bmI_exercise_tracker import BMI_Information_Store
 from Calorie_details import Calorie_Details
 import sqlite3
-
+import json
 
 conn = sqlite3.connect('bmi_info.db')
 curr = conn.cursor()
@@ -27,7 +27,15 @@ class Calorie_Tracker:
                 if self.calories[prev].isdigit():
                     return int(self.calories[prev])
     def load_low_calorie_food(self):
-        pass
+        with open('lowcalorie.json') as json_file:
+            data = json.load(json_file)
+            json_file.close()
+        self.juice = data['juice']
+        self.soup = data['Soup']
+        self.juice = sorted(self.juice.items(), key=lambda x: x[1]['Calories'])
+        self.soup = sorted(self.soup.items(), key=lambda x: x[1]['Calories'])
+        print(f"juice=={self.juice}")
+        print(f"soup=={self.soup}")
     def getting_calorie_details(self,calories,weight_info):
         if 'reduce' in weight_info:
             if self.lifestyle==1 or self.lifestyle==2:
@@ -66,9 +74,25 @@ class Calorie_Tracker:
                 """
             self.calories_user_entered+=food_calories
         if self.calories_user_entered<self.calories_needed:
-            pass
+            self.load_low_calorie_food()
+            reamining_calories=self.calories_needed-self.calories_user_entered
+            remaining_food_items=[]
+            juice1=soup1=0
+            while reamining_calories>0:
+                if soup1<len(self.soup) and reamining_calories>0:
+                    remaining_food_items.append(f"{self.soup[soup1][0]} having calories {self.soup[soup1][1]['Calories']}{self.soup[soup1][1]['unit']} and quantity {self.soup[soup1][1]['quantity']}")
+                    soup1+=1
+                if juice1<len(self.juice) and reamining_calories>0:
+                    remaining_food_items.append(f"{self.juice[juice1][0]} having calories {self.juice[juice1][1]['Calories']}{self.juice[juice1][1]['unit']} and quantity {self.juice[juice1][1]['quantity']}")
+                    juice1+=1
 
 
-c=Calorie_Tracker('Arjun','chicken curry,3 idli,1 large apple,1 litre of apple juice',3,'reduce weight')
 
-print(c.process())
+
+
+
+
+
+c=Calorie_Tracker('Arjun','chicken curry,3 idli,1 large apple,1 litre of apple juice,3 eggs',3,'reduce weight')
+c.load_low_calorie_food()
+# print(c.process())
