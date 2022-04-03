@@ -44,7 +44,7 @@ class Calorie_Details:
         res=nutrition.nutrition_info()
         return res if res!="" else "Unable to find the desired result I think there's some problem with our server'"
 
-
-c=Calorie_Details('1 litre of apple juice')
-print(c.calorie_info())
-print(c.nutrition_info())
+#
+# c=Calorie_Details('1 litre of apple juice')
+# print(c.calorie_info())
+# print(c.nutrition_info())
