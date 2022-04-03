@@ -67,24 +67,29 @@ class Calorie_Tracker:
         for food in self.fooditems.split(","):
             c=Calorie_Details(food)
             food_calories=self.calories_details_extractor(c.calorie_info())
-            print(f"food_calories=={food_calories}")
             if food_calories is None:
                 return f"""Sorry I don't have any idea about the {food} food item.
                 Please try again :)
                 """
             self.calories_user_entered+=food_calories
+        print(f"calories from user is {self.calories_user_entered}")
+        print(f"calories need :{self.calories_needed}")
         if self.calories_user_entered<self.calories_needed:
             self.load_low_calorie_food()
-            reamining_calories=self.calories_needed-self.calories_user_entered
+            remaining_calories=self.calories_needed-self.calories_user_entered
             remaining_food_items=[]
             juice1=soup1=0
-            while reamining_calories>0:
-                if soup1<len(self.soup) and reamining_calories>0:
-                    remaining_food_items.append(f"{self.soup[soup1][0]} having calories {self.soup[soup1][1]['Calories']}{self.soup[soup1][1]['unit']} and quantity {self.soup[soup1][1]['quantity']}")
+            while remaining_calories>0 and (soup1<len(self.soup) or juice1<len(self.juice)):
+                if soup1<len(self.soup) and remaining_calories>0:
+                    remaining_calories-=self.soup[soup1][1]['Calories']
+                    remaining_food_items.append(f"{self.soup[soup1][0]} having calories {self.soup[soup1][1]['Calories']} {self.soup[soup1][1]['unit']} and quantity {self.soup[soup1][1]['quantity']}")
                     soup1+=1
-                if juice1<len(self.juice) and reamining_calories>0:
-                    remaining_food_items.append(f"{self.juice[juice1][0]} having calories {self.juice[juice1][1]['Calories']}{self.juice[juice1][1]['unit']} and quantity {self.juice[juice1][1]['quantity']}")
+                if juice1<len(self.juice) and remaining_calories>0:
+                    remaining_calories -= self.juice[juice1][1]['Calories']
+                    remaining_food_items.append(f"{self.juice[juice1][0]} having calories {self.juice[juice1][1]['Calories']} {self.juice[juice1][1]['unit']} and quantity {self.juice[juice1][1]['quantity']}")
                     juice1+=1
+            print(remaining_food_items)
+            print(remaining_calories)
 
 
 
@@ -94,5 +99,5 @@ class Calorie_Tracker:
 
 
 c=Calorie_Tracker('Arjun','chicken curry,3 idli,1 large apple,1 litre of apple juice,3 eggs',3,'reduce weight')
-c.load_low_calorie_food()
-# print(c.process())
+# c.load_low_calorie_food()
+print(c.process())

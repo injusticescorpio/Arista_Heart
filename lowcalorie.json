@@ -3,17 +3,17 @@
   "juice": {
     "Apple Juice": {
       "Calories": 110,
-    "quanity": "240 ml",
+    "quantity": "240 ml",
     "unit": "cal"
   },
   "Carrot Juice": {
     "Calories": 96,
-    "quanity": "240 ml",
+    "quantity": "240 ml",
     "unit": "cal"
   },
   "Coconut Water": {
     "Calories": 46,
-    "quanity": "240 ml",
+    "quantity": "240 ml",
     "unit": "cal"
   }
 },
@@ -21,7 +21,7 @@
 
     "Cabbage Soup": {
     "Calories": 46,
-    "quanity": "1 cup 245 grams",
+    "quantity": "1 cup 245 grams",
     "unit": "cal"
   }
   },
