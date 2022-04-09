@@ -1,5 +1,4 @@
 import json
-import csv
 from collections import defaultdict
 
 class Disease_Precaution_Description:
