@@ -13,7 +13,9 @@ class Disease_Precaution_Description:
                 disease_precaution[disease.strip()].append(disease_precaution_details[disease][f"Precaution_{i}"])
         disease_precaution = dict(disease_precaution)
         try:
-            return '\n'.join(disease_precaution[self.disease.strip()])
+            nextline='\n'
+            disease_precaution[self.disease.strip()]=list(map(lambda x:'=>'+x,disease_precaution[self.disease.strip()]))
+            return f"Precaution of {self.disease} :\n{nextline.join(disease_precaution[self.disease.strip()])}"
         except:
             return "Occured some problem in retrieving the disease precaution :("
     def description(self):
@@ -23,8 +25,8 @@ class Disease_Precaution_Description:
         for disease in disease_description:
             disease_description_details[disease.strip()].append(disease_description[disease]['Description'])
         try:
-            return f'\n{"".join(disease_description_details[self.disease])}'
+            return f'Description of {self.disease} :\n{"".join(disease_description_details[self.disease])}'
         except:
             return "Occured some problem in retrieving the disease precaution :("
-d=Disease_Precaution_Description('Malaria')
-print(d.precaution())
+# d=Disease_Precaution_Description('Malaria')
+# print(d.precaution())
