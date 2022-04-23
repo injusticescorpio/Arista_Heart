@@ -34,8 +34,8 @@ def email_call_sms(name,age,hospital_name,place):
         print("error from emailing part",e)
     #Calling purpose
     try:
-        account_sid ='ACa9994e5b59dbc5cc1e6efe83fd6925b8'#os.environ['hospital_booking_sid']
-        auth_token = 'f8712938d55c37dd392d88f21698acc7'#os.environ['hospital_booking_token']
+        account_sid =os.environ['hospital_booking_sid']
+        auth_token = os.environ['hospital_booking_token']
         client = Client(account_sid, auth_token)
 
         call = client.calls.create(
@@ -63,20 +63,20 @@ def email_call_sms(name,age,hospital_name,place):
     except Exception as e:
         sms = 1
         print(f"error from messaging part",e)
-    try:
-        account_sid =os.environ['hospital_booking_sid']
-        auth_token = os.environ['hospital_booking_token']
-        client = Client(account_sid, auth_token)
-        message = client.messages \
-            .create(
-            from_='whatsapp:+14155238886',
-            body=f'hello there is a booking for a patient in this hospital\nDetails are \nName : {name}\nAge : {age}\nplace : {place}',
-            to=f'whatsapp:{hospital_contact_number}'
-        )
-        print(message.sid)
-    except Exception as e:
-        whatsapp=1
-        print("error in whatsapp part",e)
+    # try:
+    #     account_sid =os.environ['hospital_booking_sid']
+    #     auth_token = os.environ['hospital_booking_token']
+    #     client = Client(account_sid, auth_token)
+    #     message = client.messages \
+    #         .create(
+    #         from_='whatsapp:+14155238886',
+    #         body=f'hello there is a booking for a patient in this hospital\nDetails are \nName : {name}\nAge : {age}\nplace : {place}',
+    #         to=f'whatsapp:{hospital_contact_number}'
+    #     )
+    #     print(message.sid)
+    # except Exception as e:
+    #     whatsapp=1
+    #     print("error in whatsapp part",e)
 
     if calls ==0 and sms==0 and emails==0 and whatsapp==0:
         return f"Booked successfully in all three modes"
