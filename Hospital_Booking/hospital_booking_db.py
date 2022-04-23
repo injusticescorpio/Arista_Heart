@@ -12,6 +12,7 @@ class Hospital_Booking:
         self.hospital_name =hospital_name
         self.place = place
     def create_table(self):
+        curr = conn.cursor()
         curr.execute("""
         CREATE TABLE hospital_booking (
                 name text,
@@ -19,22 +20,29 @@ class Hospital_Booking:
                 hospital_name text,
                 place text)
         """)
+        curr.close()
     def insert_details(self):
+        curr = conn.cursor()
         with conn:
             curr.execute("INSERT INTO hospital_booking VALUES (:name,:age,:hospital_name,:place)",
                       {'name': self.name, 'age': self.age,'hospital_name':self.hospital_name,'place':self.place})
-
+        curr.close()
     def remove_all_details(self):
+        curr = conn.cursor()
         curr.execute('''
         DELETE FROM hospital_booking
         ''')
+        curr.close()
     def fetch(self):
+        curr = conn.cursor()
         curr.execute("SELECT * FROM hospital_booking")
-        return curr.fetchall()
+        items=curr.fetchall()
+        curr.close()
+        return items
 
 # userdata=Hospital_Booking('arju',20,'lakeshore','cgnr')
 # userdata.create_table()
 # userdata.insert_details()
-# userdata.fetch()
+# print(userdata.fetch())
 # userdata.remove_all_details()
-# userdata.fetch()
+# print(userdata.fetch())
