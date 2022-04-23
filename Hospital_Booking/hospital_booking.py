@@ -4,7 +4,8 @@ import os
 from twilio.rest import Client
 #creating server
 #Gmail
-
+print(os.environ['hospital_booking_sid'])
+print(os.environ['hospital_booking_token'])
 def email_call_sms(name,age,hospital_name,place):
     emails,calls,sms,whatsapp=0,0,0,0
     arista_password =os.environ['arista_password']
@@ -34,7 +35,7 @@ def email_call_sms(name,age,hospital_name,place):
         print("error from emailing part",e)
     #Calling purpose
     try:
-        account_sid =os.environ['hospital_booking_sid']
+        account_sid = os.environ['hospital_booking_sid']
         auth_token = os.environ['hospital_booking_token']
         client = Client(account_sid, auth_token)
 
@@ -51,14 +52,16 @@ def email_call_sms(name,age,hospital_name,place):
     #Messaging Purpose
 
     try:
-        account_sid =os.environ['hospital_booking_sid']
+        account_sid = os.environ['hospital_booking_sid']
         auth_token = os.environ['hospital_booking_token']
         client = Client(account_sid, auth_token)
+
         message = client.messages.create(
-            messaging_service_sid=os.environ['hospital_booking_msid'],
+            messaging_service_sid='MG98710a307dc51074dc7cc4897709c823',
             body=f'hello there is a booking for a patient in this hospital\nDetails are \nName : {name}\nAge : {age}\nplace : {place}',
             to=hospital_contact_number
         )
+
         print(message.sid)
     except Exception as e:
         sms = 1
@@ -90,7 +93,7 @@ def email_call_sms(name,age,hospital_name,place):
         return "there is a problem in sending message via whatsapp"
     else:
         return f"Booking Unsuccessful Please try after sometimes.."
-print(email_call_sms('arjun',20,'lakeshore hospital','cgnr'))
+# print(email_call_sms('arjun',20,'lakeshore hospital','cgnr'))
 
 
 
