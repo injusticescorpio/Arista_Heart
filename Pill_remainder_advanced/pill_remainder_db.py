@@ -5,7 +5,7 @@ conn=sqlite3.connect('pill_remainder.db')
 class Patient:
     def create_table(self):
         curr = conn.cursor()
-        curr.execute("""CREATE TABLE patient (
+        curr.execute("""CREATE TABLE IF NOT EXISTS patient (
                     day integer not null,
                      description text NOT NULL
                     )""")

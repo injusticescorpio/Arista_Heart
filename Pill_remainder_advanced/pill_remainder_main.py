@@ -1,5 +1,6 @@
 from pill_remainder_db import Patient
 import sys
+from datetime import date,timedelta
 sys.path.insert(1,'D:\S8_Project\Arista_Heart\Hospital_Booking')
 
 from hospital_booking import email_call_sms
@@ -12,9 +13,15 @@ while True:
     print('started')
     while db.fetch() == []:
         pass
-    items=db.fetch()
+    number_of_medicine,description=db.fetch()[-1]
     db.remove_all_details()
-    print(items)
+    for medicine_details in description.split(','):
+        medicine_full_details=medicine_details.split(' ')
+        medicine_name, medicine_taking_duration,*medicine_timings=medicine_full_details
+        medicine_taking_time=int(medicine_taking_duration)
+        reminder_start_date=date.today()
+        reminder_end_date=reminder_start_date+timedelta(medicine_taking_time)
+
 
 
 
