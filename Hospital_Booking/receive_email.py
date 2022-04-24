@@ -20,14 +20,14 @@ while True:
     current_date = str(current_date_time_info.strftime("%d-%b-%Y"))
     print('started')
     while db.fetch()==[]:
-        db.fetch()
+        pass
     items=db.fetch()
     db.remove_all_details()
     print(items)
     hospital_contact_number = d[items[0][2].lower()][1]
     print(hospital_contact_number)
     current_time = datetime.now()
-    future_time = current_time + timedelta(minutes=1)
+    future_time = current_time + timedelta(minutes=5)
     current_time=current_time.strftime("%H:%M")
     future_time=future_time.strftime("%H:%M")
     while current_time<future_time:
