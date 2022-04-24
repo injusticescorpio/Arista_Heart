@@ -16,11 +16,11 @@ d = {
 }
 
 while True:
-    current_date_time_info = datetime.now()
-    current_date = str(current_date_time_info.strftime("%d-%b-%Y"))
     print('started')
     while db.fetch()==[]:
         pass
+    current_date_time_info = datetime.now()
+    current_date = str(current_date_time_info.strftime("%d-%b-%Y"))
     items=db.fetch()
     db.remove_all_details()
     print(items)
