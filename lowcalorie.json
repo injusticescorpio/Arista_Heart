@@ -1,34 +1,345 @@
 
 {
+
   "juice": {
+
     "Apple Juice": {
       "Calories": 110,
     "quantity": "240 ml",
     "unit": "cal"
-  },
-  "Carrot Juice": {
+    },
+   "Carrot Juice": {
     "Calories": 96,
     "quantity": "240 ml",
     "unit": "cal"
-  },
-  "Coconut Water": {
+   },
+   "Coconut Water": {
     "Calories": 46,
     "quantity": "240 ml",
     "unit": "cal"
-  }
+  },
+    "Cranberry Juice": {
+      "Calories": 110,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Cucumber Juice": {
+      "Calories": 24,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Grapefruit Juice": {
+      "Calories": 110,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Lemon Juice": {
+      "Calories": 50,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Lime Juice": {
+      "Calories": 50,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Nestea": {
+      "Calories": 50,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Orange Juice": {
+      "Calories": 110,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Passion Fruit Juice": {
+      "Calories": 115,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Sauerkaut Juice":{
+      "Calories": 34,
+      "quantity": "240 ml",
+      "unit": "cal"
+    },
+    "Tomato Juice": {
+      "Calories": 41,
+      "quantity": "240 ml",
+      "unit": "cal"
+    }
+
 },
   "Soup":{
 
     "Cabbage Soup": {
-    "Calories": 46,
-    "quantity": "1 cup 245 grams",
-    "unit": "cal"
-  }
+      "Calories": 69,
+      "quantity": "1 cup 245 grams",
+      "unit": "cal"
+    },
+    "Beef Noodle Soup": {
+      "Calories": 83,
+      "quantity": "1 cup 244 grams",
+      "unit": "cal"
+    },
+    "Beef Soup": {
+      "Calories": 70,
+      "quantity": "1 cup 213 grams",
+      "unit": "cal"
+    },
+    "Carrot Ginger Soup": {
+      "Calories": 95,
+      "quantity": "1 cup 381 grams",
+      "unit": "cal"
+    },
+    "Chicken Noodle Soup": {
+      "Calories": 62,
+      "quantity": "1 cup 248 grams",
+      "unit": "cal"
+    },
+    "Cream of Mushroom Soup": {
+      "Calories": 97,
+      "quantity": "1 cup 248 grams",
+      "unit": "cal"
+    },
+    "Cream of Potato Soup": {
+      "Calories": 73,
+      "quantity": "1 cup 244 grams",
+      "unit": "cal"
+    },
+    "Cream of Onion Soup": {
+      "Calories": 107,
+      "quantity": "1 cup 244 grams",
+      "unit": "cal"
+    },
+    "French Onion Soup": {
+      "Calories": 56,
+      "quantity": "1 cup 243 grams",
+      "unit": "cal"
+    },
+    "Minestrone": {
+      "Calories": 82,
+      "quantity": "1 cup 241 grams",
+      "unit": "cal"
+    },
+    "Mushroom Soup": {
+      "Calories": 85,
+      "quantity": "1 cup 244 grams",
+      "unit": "cal"
+    },
+    "Onion Soup": {
+      "Calories": 56,
+      "quantity": "1 cup 243 grams",
+      "unit": "cal"
+    },
+    "Oxtail Soup": {
+      "Calories": 68,
+      "quantity": "1 cup 244 grams",
+      "unit": "cal"
+    },
+    "Pumpkin Soup": {
+      "Calories": 71,
+      "quantity": "1 cup 245 grams",
+      "unit": "cal"
+    },
+    "Scotch Broth": {
+      "Calories": 80,
+      "quantity": "1 cup 241 grams",
+      "unit": "cal"
+    },
+    "Tomato Soup": {
+      "Calories": 74,
+      "quantity": "1 cup 248 grams",
+      "unit": "cal"
+    },
+    "Vegetable Soup": {
+      "Calories": 67,
+      "quantity": "1 cup 241 grams",
+      "unit": "cal"
+    }
   },
+
   "dishes-meals": {
 
+    "Black Pudding": {
+      "Calories": 101,
+      "quantity": "1 pudding 40 grams",
+      "unit": "cal"
+    },
+    "California Roll": {
+      "Calories": 33,
+      "quantity": "1 roll 35 grams",
+      "unit": "cal"
+    },
+    "Collard Greens": {
+      "Calories": 13,
+      "quantity": "1 cup 45 grams",
+      "unit": "cal"
+    },
+    "Deviled Eggs": {
+      "Calories": 62,
+      "quantity": "1/2 egg 31 grams",
+      "unit": "cal"
+    },
+    "Dim Sum": {
+      "Calories": 37,
+      "quantity": "1 piece 19 grams",
+      "unit": "cal"
+    },
+    "Fired Shrimp": {
+      "Calories": 75,
+      "quantity": "1 shrimp 27 grams",
+      "unit": "cal"
+    },
+    "Roast Beef": {
+      "Calories": 23,
+      "quantity": "1 slice 21 grams",
+      "unit": "cal"
+    },
+    "Samosa": {
+      "Calories": 107,
+      "quantity": "1 samosa 50 grams",
+      "unit": "cal"
+    },
+    "Sausage Roll": {
+      "Calories": 101,
+      "quantity": "1 roll 34 grams",
+      "unit": "cal"
+    },
+    "Sloppy Joe": {
+      "Calories": 101,
+      "quantity": "1/2 cup 142 grams",
+      "unit": "cal"
+    },
+    "Yorkshire Pudding": {
+      "Calories": 83,
+      "quantity": "1 pudding 15 grams",
+      "unit": "cal"
+    }
   },
-  "nuts-seeds": {}
+  "nuts-seeds": {
+
+    "Acorn": {
+      "Calories": 108,
+      "quantity": "1 oz. 28.35 grams",
+      "unit": "cal"
+    },
+    "Breadfruit": {
+      "Calories": 53,
+      "quantity": "1 oz. 28.35 grams",
+      "unit": "cal"
+    },
+    "Ginkgo Nuts": {
+      "Calories": 51,
+      "quantity": "1 oz. 28.35 grams",
+      "unit": "cal"
+    },
+    "Lima Beans": {
+      "Calories": 88,
+      "quantity": "1/2 cup 124 grams",
+      "unit": "cal"
+    },
+    "Lotus Seed": {
+      "Calories": 25,
+      "quantity": "1 oz. 28.35 grams",
+      "unit": "cal"
+    },
+    "Peas": {
+      "Calories": 117,
+      "quantity": "1 cup 145 grams",
+      "unit": "cal"
+    },
+    "Poppy Seeds": {
+      "Calories": 42,
+      "quantity": "1 tbsp 8.8 grams",
+      "unit": "cal"
+    }
+    "Radish Seeds": {
+      "Calories": 16,
+      "quantity": "1 cup 38 grams",
+      "unit": "cal"
+    },
+    "Sweet Chestnut": {
+      "Calories": 54,
+      "quantity": "1 oz. 28.35 grams",
+      "unit": "cal"
+    },
+    "Watermelon": {
+      "Calories": 86,
+      "quantity": "1 wedge 286 grams",
+      "unit": "cal"
+    }
+
+  },
+
+  "ice-cream": {
+
+    "Chocolate Chip Ice Cream": {
+      "Calories": 155,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Chocolate Ice Cream": {
+      "Calories": 156,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Coffee Ice Cream": {
+      "Calories": 170,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Cookie Dough Ice Cream": {
+      "Calories": 130,
+      "quantity": "1/2 cup 65 grams",
+      "unit": "cal"
+    },
+    "French Vanilla Ice Cream": {
+      "Calories": 145,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Ice Milk": {
+      "Calories": 164,
+      "quantity": "1 scope 103 grams",
+      "unit": "cal"
+    },
+    "Magnolia": {
+      "Calories": 166,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Schwan's": {
+      "Calories": 177,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Snickers Ice Cream": {
+      "Calories": 180,
+      "quantity": "1 bar 50 grams",
+      "unit": "cal"
+    }
+    "Solero": {
+      "Calories": 75,
+      "quantity": "1 solero 75 grams",
+      "unit": "cal"
+    },
+    "Sundae": {
+      "Calories": 155,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Vanilla Ice Cream": {
+      "Calories": 145,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    },
+    "Mint Chocolate Chip Ice Cream": {
+      "Calories": 172,
+      "quantity": "1 scope 72 grams",
+      "unit": "cal"
+    }
+  },
 
 
 }

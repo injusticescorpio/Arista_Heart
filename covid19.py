@@ -1,52 +1,31 @@
 import requests
-import json
-response=requests.get('https://api.covid19india.org/state_district_wise.json').json()
-kerala_details=response['Kerala']
-# print(kerala_details)
 
-class Covid_19():
-    def __init__(self,district):
-        self.district=district
-    def covid_19_details_total(self):
-        for i in kerala_details['districtData'].items():
-            if i[0]==self.district.title():
-                return(f"{self.district} Details so far\nActive cases:   {i[1]['active']}\nConfirmed Cases:{i[1]['confirmed']}\nDecreased by:{i[1]['deceased']}\nRecovered by:{i[1]['recovered']}")
-        return('No such districts in kerala!Check whether your spellings are correct')    
-
-    def covid_19_details_current(self):
-        for i in kerala_details['districtData'].items():
-            if i[0]==self.district.title():
-                return(f"{self.district} todays details so far\nConfirmed Cases:{i[1]['delta']['confirmed']}\nDeceased by:{i[1]['deceased']}\nRecovered by:{i[1]['delta']['recovered']}")
-        return('No such districts in kerala!Check whether your spellings are correct')
-    
-    def total_covid_19(self):   
-        total_confirmed=0
-        total_recovered=0
-        total_death=0
-        for i in kerala_details['districtData'].items():
-            total_confirmed+=i[1]['delta']['confirmed']
-            total_recovered+=i[1]['delta']['recovered']
-            total_death+=i[1]['delta']['deceased']
-        if(total_confirmed==0 and total_recovered==0 and total_death==0):
-            return ("Sorry I didn't get the information yet! Please Try after sometime ")
-        return (f"Kerala's Total confirmed cases of Today:  {total_confirmed}\n Kerala's Total recovered cases of Today:  {total_recovered}\n Kerala's Total death cases of Today: {total_death}")
-    def kerala_total(self):
-        total_confirmed = 0
-        total_death = 0
-        total_recovered = 0
-        total_active = 0
-        for i in kerala_details['districtData'].items():
-            if i[0] not in ['Other State', 'Unknown']:
-                total_confirmed += i[1]['confirmed']
-                total_recovered += i[1]['recovered']
-                total_death += i[1]['deceased']
-                total_active += i[1]['active']
-        return(f"Kerala Full details\n Total Confirmed: {total_confirmed} \n Total Recovered: {total_recovered}  \n Total Death: {total_death}  \n Currently Active: {total_active}")
+# Global API
+response = requests.get('https://jerilmj.github.io/covid19-compiled/reports.json').json()
+# List of country and its code
+c_dic = {'Afghanistan': 'AFG', 'Aland Islands': 'ALA', 'Albania': 'ALB', 'Algeria': 'DZA', 'American Samoa': 'ASM', 'Andorra': 'AND', 'Angola': 'AGO', 'Anguilla': 'AIA', 'Antarctica': 'ATA', 'Antigua and Barbuda': 'ATG', 'Argentina': 'ARG', 'Armenia': 'ARM', 'Aruba': 'ABW', 'Australia': 'AUS', 'Austria': 'AUT', 'Azerbaijan': 'AZE', 'Bahamas': 'BHS', 'Bahrain': 'BHR', 'Bangladesh': 'BGD', 'Barbados': 'BRB', 'Belarus': 'BLR', 'Belgium': 'BEL', 'Belize': 'BLZ', 'Benin': 'BEN', 'Bermuda': 'BMU', 'Bhutan': 'BTN', 'Bolivia': 'BOL', 'Bosnia and Herzegovina': 'BIH', 'Botswana': 'BWA', 'Bouvet Island': 'BVT', 'Brazil': 'BRA', 'British Virgin Islands': 'VGB', 'British Indian Ocean Territory': 'IOT', 'Brunei Darussalam': 'BRN', 'Bulgaria': 'BGR', 'Burkina Faso': 'BFA', 'Burundi': 'BDI', 'Cambodia': 'KHM', 'Cameroon': 'CMR', 'Canada': 'CAN', 'Cape Verde': 'CPV', 'Cayman Islands': 'CYM', 'Central African Republic': 'CAF', 'Chad': 'TCD', 'Chile': 'CHL', 'China': 'CHN', 'Hong Kong': 'HKG', 'Macao': 'MAC', 'Christmas Island': 'CXR', 'Cocos Islands': 'CCK', 'Colombia': 'COL', 'Comoros': 'COM', 'Congo': 'COD', 'Cook Islands': 'COK', 'Costa Rica': 'CRI', "Cote d'Ivoire": 'CIV', 'Croatia': 'HRV', 'Cuba': 'CUB', 'Cyprus': 'CYP', 'Czech Republic': 'CZE', 'Denmark': 'DNK', 'Djibouti': 'DJI', 'Dominica': 'DMA', 'Dominican Republic': 'DOM', 'Ecuador': 'ECU', 'Egypt': 'EGY', 'El Salvador': 'SLV', 'Equatorial Guinea': 'GNQ', 'Eritrea': 'ERI', 'Estonia': 'EST', 'Ethiopia': 'ETH', 'Falkland Islands': 'FLK', 'Faroe Islands': 'FRO', 'Fiji': 'FJI', 'Finland': 'FIN', 'France': 'FRA', 'French Guiana': 'GUF', 'French Polynesia': 'PYF', 'French Southern Territories': 'ATF', 'Gabon': 'GAB', 'Gambia': 'GMB', 'Georgia': 'GEO', 'Germany': 'DEU', 'Ghana': 'GHA', 'Gibraltar': 'GIB', 'Greece': 'GRC', 'Greenland': 'GRL', 'Grenada': 'GRD', 'Guadeloupe': 'GLP', 'Guam': 'GUM', 'Guatemala': 'GTM', 'Guernsey': 'GGY', 'Guinea': 'GIN', 'Guinea-Bissau': 'GNB', 'Guyana': 'GUY', 'Haiti': 'HTI', 'Heard Island and Mcdonald Islands': 'HMD', 'Holy See': 'VAT', 'Honduras': 'HND', 'Hungary': 'HUN', 'Iceland': 'ISL', 'India': 'IND', 'Indonesia': 'IDN', 'Iran': 'IRN', 'Iraq': 'IRQ', 'Ireland': 'IRL', 'Isle of Man': 'IMN', 'Israel': 'ISR', 'Italy': 'ITA', 'Jamaica': 'JAM', 'Japan': 'JPN', 'Jersey': 'JEY', 'Jordan': 'JOR', 'Kazakhstan': 'KAZ', 'Kenya': 'KEN', 'Kiribati': 'KIR', 'Korea': 'KOR', 'Kuwait': 'KWT', 'Kyrgyzstan': 'KGZ', 'Lao PDR': 'LAO', 'Latvia': 'LVA', 'Lebanon': 'LBN', 'Lesotho': 'LSO', 'Liberia': 'LBR', 'Libya': 'LBY', 'Liechtenstein': 'LIE', 'Lithuania': 'LTU', 'Luxembourg': 'LUX', 'Macedonia': 'MKD', 'Madagascar': 'MDG', 'Malawi': 'MWI', 'Malaysia': 'MYS', 'Maldives': 'MDV', 'Mali': 'MLI', 'Malta': 'MLT', 'Marshall Islands': 'MHL', 'Martinique': 'MTQ', 'Mauritania': 'MRT', 'Mauritius': 'MUS', 'Mayotte': 'MYT', 'Mexico': 'MEX', 'Micronesia': 'FSM', 'Moldova': 'MDA', 'Monaco': 'MCO', 'Mongolia': 'MNG', 'Montenegro': 'MNE', 'Montserrat': 'MSR', 'Morocco': 'MAR', 'Mozambique': 'MOZ', 'Myanmar': 'MMR', 'Namibia': 'NAM', 'Nauru': 'NRU', 'Nepal': 'NPL', 'Netherlands': 'NLD', 'Netherlands Antilles': 'ANT', 'New Caledonia': 'NCL', 'New Zealand': 'NZL', 'Nicaragua': 'NIC', 'Niger': 'NER', 'Nigeria': 'NGA', 'Niue': 'NIU', 'Norfolk Island': 'NFK', 'Northern Mariana Islands': 'MNP', 'Norway': 'NOR', 'Oman': 'OMN', 'Pakistan': 'PAK', 'Palau': 'PLW', 'Palestinian Territory': 'PSE', 'Panama': 'PAN', 'Papua New Guinea': 'PNG', 'Paraguay': 'PRY', 'Peru': 'PER', 'Philippines': 'PHL', 'Pitcairn': 'PCN', 'Poland': 'POL', 'Portugal': 'PRT', 'Puerto Rico': 'PRI', 'Qatar': 'QAT', 'Reunion': 'REU', 'Romania': 'ROU', 'Russian Federation': 'RUS', 'Rwanda': 'RWA', 'Saint Barthelemy': 'BLM', 'Saint Helena': 'SHN', 'Saint Kitts and Nevis': 'KNA', 'Saint Lucia': 'LCA', 'Saint-Martin': 'MAF', 'Saint Pierre and Miquelon': 'SPM', 'Saint Vincent and Grenadines': 'VCT', 'Samoa': 'WSM', 'San Marino': 'SMR', 'Sao Tome and Principe': 'STP', 'Saudi Arabia': 'SAU', 'Senegal': 'SEN', 'Serbia': 'SRB', 'Seychelles': 'SYC', 'Sierra Leone': 'SLE', 'Singapore': 'SGP', 'Slovakia': 'SVK', 'Slovenia': 'SVN', 'Solomon Islands': 'SLB', 'Somalia': 'SOM', 'South Africa': 'ZAF', 'South Georgia': 'SGS', 'South Sudan': 'SSD', 'Spain': 'ESP', 'Sri Lanka': 'LKA', 'Sudan': 'SDN', 'Suriname': 'SUR', 'Svalbard': 'SJM', 'Swaziland': 'SWZ', 'Sweden': 'SWE', 'Switzerland': 'CHE', 'Syrian Arab Republic': 'SYR', 'Taiwan': 'TWN', 'Tajikistan': 'TJK', 'Tanzania': 'TZA', 'Thailand': 'THA', 'Timor Leste': 'TLS', 'Togo': 'TGO', 'Tokelau': 'TKL', 'Tonga': 'TON', 'Trinidad': 'TTO', 'Tunisia': 'TUN', 'Turkey': 'TUR', 'Turkmenistan': 'TKM', 'Turks': 'TCA', 'Tuvalu': 'TUV', 'Uganda': 'UGA', 'Ukraine': 'UKR', 'United Arab Emirates': 'ARE', 'United Kingdom': 'GBR', 'United States of America': 'USA', 'United States Minor Outlying Islands': 'UMI', 'Uruguay': 'URY', 'Uzbekistan': 'UZB', 'Vanuatu': 'VUT', 'Venezuela': 'VEN', 'Viet Nam': 'VNM', 'Virgin Islands': 'VIR', 'Wallis and Futuna Islands': 'WLF', 'Western Sahara': 'ESH', 'Yemen': 'YEM', 'Zambia': 'ZMB', 'Zimbabwe': 'ZWE'}
 
 
+class Covid_19:
+  def __init__(self, country):
+    if(country in c_dic.keys()):
+      self.country = c_dic[country]
+    else:
+      self.country = None
 
-# place=Covid_19('kannur')
+  def covid_19_details_current(self):
+    if(self.country in response.keys()):
+      details = response[self.country]
+      print(f"{self.country} today's details so far\nConfirmed Cases: {details['confirmed']}\nRecovered BY: {details['recovered']}\nDeath By: {details['deaths']}\nFatality Rate: {details['fatality_rate']}")
+    else:
+      print("No such country in the World!Check whether your spellings are correct")
+
+
+if __name__ == "__main__":
+  country = input("Enter code: ").capitalize()  # To make the comparison case-insensitive
+  obj = Covid_19(country)
+  obj.covid_19_details_current()
+
+# place=Covid_19('india')
+# make sure to use .cpitalize() method with user input, otherwise code will fall
 # print(place.covid_19_details_current())
-# print(place.covid_19_details_total())
-# print(place.total_covid_19())
-# print(place.kerala_total())
