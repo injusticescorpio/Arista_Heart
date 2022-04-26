@@ -16,15 +16,14 @@ class Covid_19:
   def covid_19_details_current(self):
     if(self.country in response.keys()):
       details = response[self.country]
-      print(f"{self.country} today's details so far\nConfirmed Cases: {details['confirmed']}\nRecovered BY: {details['recovered']}\nDeath By: {details['deaths']}\nFatality Rate: {details['fatality_rate']}")
+      return(f"{self.country} today's details so far\nConfirmed Cases: {details['confirmed']}\nRecovered BY: {details['recovered']}\nDeath By: {details['deaths']}\nFatality Rate: {details['fatality_rate']}")
     else:
-      print("No such country in the World!Check whether your spellings are correct")
+      return("No such country in the World!Check whether your spellings are correct")
 
 
-if __name__ == "__main__":
-  country = input("Enter code: ").capitalize()  # To make the comparison case-insensitive
-  obj = Covid_19(country)
-  obj.covid_19_details_current()
+country = input("Enter code: ").capitalize()  # To make the comparison case-insensitive
+obj = Covid_19(country)
+obj.covid_19_details_current()
 
 # place=Covid_19('india')
 # make sure to use .cpitalize() method with user input, otherwise code will fall

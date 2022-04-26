@@ -4,13 +4,10 @@ https://www.verywellfit.com/how-many-calories-do-i-need-each-day-2506873
 https://www.medicinenet.com/how_to_calculate_calorie_deficit_for_weight_loss/article.htm
 '''
 
-from bmI_exercise_tracker import BMI_Information_Store
+from BMI_db import BMI_Information_Store
 from Calorie_details import Calorie_Details
 import sqlite3
 import json
-
-conn = sqlite3.connect('bmi_info.db')
-curr = conn.cursor()
 class Calorie_Tracker:
     def __init__(self,name,fooditems,lifestyle,weight_info):
         self.name = name
@@ -32,10 +29,20 @@ class Calorie_Tracker:
             json_file.close()
         self.juice = data['juice']
         self.soup = data['Soup']
+        self.dishes_meals=data['dishes-meals']
+        self.nuts_seeds=data['nuts-seeds']
+        self.ice_cream=data['ice-cream']
+
         self.juice = sorted(self.juice.items(), key=lambda x: x[1]['Calories'])
         self.soup = sorted(self.soup.items(), key=lambda x: x[1]['Calories'])
+        self.dishes_meals=sorted(self.dishes_meals.items(), key=lambda x: x[1]['Calories'])
+        self.nuts_seeds=sorted(self.nuts_seeds.items(), key=lambda x: x[1]['Calories'])
+        self.ice_cream=sorted(self.ice_cream.items(), key=lambda x: x[1]['Calories'])
         print(f"juice=={self.juice}")
         print(f"soup=={self.soup}")
+        print(f"dishes_meals=={self.dishes_meals}")
+        print(f"nuts_seeds=={self.nuts_seeds}")
+        print(f"ice_cream=={self.ice_cream}")
     def getting_calorie_details(self,calories,weight_info):
         if 'reduce' in weight_info:
             if self.lifestyle==1 or self.lifestyle==2:
@@ -78,16 +85,28 @@ class Calorie_Tracker:
             self.load_low_calorie_food()
             remaining_calories=self.calories_needed-self.calories_user_entered
             remaining_food_items=[]
-            juice1=soup1=0
+            juice1=soup1=dishes_meals1=nuts_seeds1=ice_cream1=0
             while remaining_calories>0 and (soup1<len(self.soup) or juice1<len(self.juice)):
-                if soup1<len(self.soup) and remaining_calories>0:
+                if soup1<len(self.soup) and (remaining_calories-self.soup[soup1][1]['Calories'])>=0:
                     remaining_calories-=self.soup[soup1][1]['Calories']
                     remaining_food_items.append(f"{self.soup[soup1][0]} having calories {self.soup[soup1][1]['Calories']} {self.soup[soup1][1]['unit']} and quantity {self.soup[soup1][1]['quantity']}")
                     soup1+=1
-                if juice1<len(self.juice) and remaining_calories>0:
+                if juice1<len(self.juice) and (remaining_calories- self.juice[juice1][1]['Calories'])>=0:
                     remaining_calories -= self.juice[juice1][1]['Calories']
                     remaining_food_items.append(f"{self.juice[juice1][0]} having calories {self.juice[juice1][1]['Calories']} {self.juice[juice1][1]['unit']} and quantity {self.juice[juice1][1]['quantity']}")
                     juice1+=1
+                if dishes_meals1<len(self.dishes_meals) and (remaining_calories-self.dishes_meals[dishes_meals1][1]['Calories'])>=0:
+                    remaining_calories-=self.dishes_meals[dishes_meals1][1]['Calories']
+                    remaining_food_items.append(f"{self.dishes_meals[dishes_meals1][0]} having calories {self.dishes_meals[dishes_meals1][1]['Calories']} {self.dishes_meals[dishes_meals1][1]['unit']} and quantity {self.dishes_meals[dishes_meals1][1]['quantity']}")
+                    dishes_meals1+=1
+                if nuts_seeds1<len(self.nuts_seeds) and (remaining_calories-self.nuts_seeds[nuts_seeds1][1]['Calories'])>=0:
+                    remaining_calories-=self.nuts_seeds[nuts_seeds1][1]['Calories']
+                    remaining_food_items.append(f"{self.nuts_seeds[nuts_seeds1][0]} having calories {self.nuts_seeds[nuts_seeds1][1]['Calories']} {self.nuts_seeds[nuts_seeds1][1]['unit']} and quantity {self.nuts_seeds[nuts_seeds1][1]['quantity']}")
+                    nuts_seeds1+=1
+                if ice_cream1<len(self.ice_cream) and(remaining_calories-self.ice_cream[ice_cream1][1]['Calories'])>=0:
+                    remaining_calories-=self.ice_cream[ice_cream1][1]['Calories']
+                    remaining_food_items.append(f"{self.ice_cream[ice_cream1][0]} having calories {self.ice_cream[ice_cream1][1]['Calories']} {self.ice_cream[ice_cream1][1]['unit']} and quantity {self.ice_cream[ice_cream1][1]['quantity']}")
+                    ice_cream1+=1
             print(remaining_food_items)
             print(remaining_calories)
 
