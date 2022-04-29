@@ -1,8 +1,11 @@
 from bloodbank_db import Blood_Bank
 
 def distance_btw_two_places(place1,place2):
-    pass
-
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?"
+    distanceapi = os.environ['distanceapi']
+    response = requests.get(url + 'origins=' + place1 + '&destinations=' + place2 + '&key=' + distanceapi).json()
+    res = response['rows'][0]['elements'][0]['distance']['text']
+    return res
 
 def Blood_Bank_details(blood_group,name,no_of_units,case,required_date,admitted_hopsital,bleeding_place,bleeding_time,district,contact_number,bystander_name):
     db=Blood_Bank()
