@@ -2,10 +2,9 @@ import smtplib
 from email.message import EmailMessage
 import os
 from twilio.rest import Client
-#creating server
-#Gmail
 
-def call_sms(,ambulance_driver_mobile):
+
+def call_sms1(name,contact,place,ambulance_driver_mobile):
     calls,sms=0,0
     #Calling purpose
     try:
@@ -14,7 +13,7 @@ def call_sms(,ambulance_driver_mobile):
         client = Client(account_sid, auth_token)
 
         call = client.calls.create(
-            twiml='<Response><Say>There is an emergency for blood details will be forward via sms please check and do the needful</Say></Response>',
+            twiml='<Response><Say>There is an emergency for an ambulance service, Details will be forward via sms please check and do the needful</Say></Response>',
             to=ambulance_driver_mobile,
             from_= '+13605154394'
         )
@@ -32,10 +31,13 @@ def call_sms(,ambulance_driver_mobile):
         message = client.messages.create(
             messaging_service_sid=os.environ['hospital_booking_msid'],
             body=f'''
-                Ambulance Service 
-                
-            
-                     
+                There's an emergency for Ambulance Service, Details of the patient is mentioned below
+                patient's name :{name}
+                patient's phone number :{contact}
+                patient's place : {place}
+                 Kindly do the needful
+                 Regards
+                 ArIsTa
                     ''',
             to=ambulance_driver_mobile
         )
