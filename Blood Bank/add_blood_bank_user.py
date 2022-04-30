@@ -11,10 +11,10 @@ def fake_details_generating():
         user.insert_details(fake.first_name_male(),fake.phone_number(),location[_])
     print(user.fetch())
 # fake_details_generating()
-def add_ambulance_driver_details(name,mobile,place):
+def add_representative_details(name,mobile,place):
     user.insert_details(name.title(), mobile, place.title())
     return f"user created with id number {user.fetch()[-1][0]} save this id for further usage"
 
-def update_ambulance_driver_details(name,mobile,place,id):
+def update_representative_details(name,mobile,place,id):
     user.update_details(name.title(),mobile,place.title(),id)
     return f"user successfully updated"
