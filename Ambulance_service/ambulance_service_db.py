@@ -56,13 +56,13 @@ class Ambulance_Service:
 
 
 
-user=Ambulance_Service()
-user.create_table()
-print(user.insert_details('arjun','+919074774118','Kollam'))
-print(user.insert_details('arj','+919074774118','cgnr'))
-print(user.insert_details('arj','+919074774118','cgnr'))
-print(user.fetch())
-user.update_details('arjun','+919074774118','nepal',3)
-user.remove_user(2)
-print(user.insert_details('arj','+919074774118','cgnr'))
-print(user.fetch())
+# user=Ambulance_Service()
+# user.create_table()
+# print(user.insert_details('arjun','+919074774118','Kollam'))
+# print(user.insert_details('arj','+919074774118','cgnr'))
+# print(user.insert_details('arj','+919074774118','cgnr'))
+# print(user.fetch())
+# user.update_details('arjun','+919074774118','nepal',3)
+# user.remove_user(2)
+# print(user.insert_details('arj','+919074774118','cgnr'))
+# print(user.fetch())

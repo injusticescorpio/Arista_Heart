@@ -3,6 +3,7 @@
 from datetime import datetime,timedelta
 from hospital_booking import email_call_sms
 from hospital_booking_db import Hospital_Booking
+from hospital_available_check import checking_hospital_availability
 import os
 from twilio.rest import Client
 import email
@@ -16,7 +17,8 @@ d = {
 }
 
 while True:
-    print('started')
+    print("started")
+    db.remove_all_details()
     while db.fetch()==[]:
         pass
     current_date_time_info = datetime.now()
@@ -26,6 +28,7 @@ while True:
     print(items)
     hospital_contact_number = d[items[0][2].lower()][1]
     print(hospital_contact_number)
+    print(checking_hospital_availability(*(items[0])))
     current_time = datetime.now()
     future_time = current_time + timedelta(minutes=5)
     current_time=current_time.strftime("%H:%M")
