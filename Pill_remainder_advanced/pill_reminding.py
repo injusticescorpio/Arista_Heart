@@ -49,7 +49,7 @@ def email_call_sms(name,contact_number,email,medicine_name):
         client = Client(account_sid, auth_token)
         message = client.messages.create(
             messaging_service_sid=os.environ['hospital_booking_msid'],
-            body=f'hello there is a booking for a patient in this hospital\nDetails are \nName : {name}\nAge : {age}\nplace : {place}',
+            body=f'Hello {name}\n  It\'s time to medicine {medicine_name}\nRegards Arista :)',
             to=contact_number
         )
         print(message.sid)
