@@ -7,14 +7,17 @@ class Patient:
         curr = conn.cursor()
         curr.execute("""CREATE TABLE IF NOT EXISTS patient (
                     day integer not null,
+                    name text not null,
+                    contact text not null,
+                    email text not null,
                      description text NOT NULL
                     )""")
         curr.close()
-    def insert_details(self,day,description):
+    def insert_details(self,day,name,contact,email,description):
         with conn:
             curr = conn.cursor()
-            curr.execute("INSERT INTO patient VALUES (:day,:description)",
-                     {'day': day, 'description': description})
+            curr.execute("INSERT INTO patient VALUES (:day,:name,:contact,:email,:description)",
+                     {'day': day,'name':name,'contact':contact,'email':email, 'description': description})
             curr.close()
 
     def fetch(self):
