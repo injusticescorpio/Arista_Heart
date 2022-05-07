@@ -6,7 +6,7 @@ from hospital_booking import email_call_sms
 from apscheduler.schedulers.background import BackgroundScheduler
 
 # Creates a default Background Scheduler
-sched = BackgroundScheduler(daemon=True)
+sched = BackgroundScheduler()
 def pill_remainder(*userdetails):
     print(userdetails)
 
@@ -32,43 +32,43 @@ while True:
                           args=[name,email_id,medicine_name])
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=14,minute=53,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=20,minute=30,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif 'day' in medicine_timings and 'noon' in medicine_timings:
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=8,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=12,minute=30,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif 'day' in medicine_timings and 'night' in medicine_timings:
             sched.add_job(pill_remainder, 'cron', start_date=reminder_start_date, hour=8,
                           end_date=reminder_end_date,
-                          args=[name, email_id, medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
             sched.add_job(pill_remainder, 'cron', start_date=reminder_start_date, hour=20, minute=30,
                           end_date=reminder_end_date,
-                          args=[name, email_id, medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif 'noon' in medicine_timings and 'night' in medicine_timings:
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=12,minute=30,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
             sched.add_job(pill_remainder, 'cron',start_date=reminder_start_date  ,hour=20,minute=30,
                           end_date=reminder_end_date,
-                          args=[name,email_id,medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif len(medicine_timings)==1 and 'day' in medicine_timings:
             sched.add_job(pill_remainder, 'cron', start_date=reminder_start_date, hour=8,
                           end_date=reminder_end_date,
-                          args=[name, email_id, medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif len(medicine_timings) == 1 and 'noon' in medicine_timings:
             sched.add_job(pill_remainder, 'cron', start_date=reminder_start_date, hour=12, minute=30,
                           end_date=reminder_end_date,
-                          args=[name, email_id, medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         elif len(medicine_timings) == 1 and 'night' in medicine_timings:
             sched.add_job(pill_remainder, 'cron', start_date=reminder_start_date, hour=20, minute=30,
                           end_date=reminder_end_date,
-                          args=[name, email_id, medicine_name])
+                          args=[name,contact_number,email_id,medicine_name])
         else:
             print("invalid entry from user part")
 
