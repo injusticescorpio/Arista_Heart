@@ -1,0 +1,241 @@
+/* ----------------------------
+General
+---------------------------- */
+
+.container-css {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.cen {
+  text-align:center;
+  display: flex;
+  align-items: center;
+}
+
+.cen-text {
+  text-align: left;
+  display: flex;
+  justify-content: center;
+}
+
+.headings {
+  font-size: 38.76px;
+}
+
+.p {
+   font-size: 25px;
+   /* font-weight: 600; */
+ }
+/* ------------------------------
+navbar
+---------------------------- */
+.navbar {
+  opacity: 0.9;
+  background-image: linear-gradient(to bottom right, #007acc, #0099ff, #33adff);
+}
+
+.navbar a {
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.nav{
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+/* ---------------------------------
+Header and home
+----------------------------- */
+
+.head {
+  padding: 35px 0;
+}
+
+.home {
+  background-image: linear-gradient(to bottom right, #0033cc, #0066ff, #3399ff, #66ccff);
+  background-size: cover;
+}
+
+.home-text {
+  color: white;
+}
+
+.himg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.linkto button {
+  background-image: linear-gradient(to right, #00cccc, #00ffff);
+  border: 0;
+  padding: 10px 25px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.linkto button:hover {
+  background-image: linear-gradient(to right, #b32400, #ff3300);
+}
+
+/* ----------------------
+Services
+----------------------- */
+
+.container-img {
+   position: relative;
+   width: 50%;
+ }
+
+ .fea {
+   max-width: 100%;
+   height: auto;
+ }
+
+ .image {
+   opacity: 1;
+   display: block;
+   width: 100%;
+   height: auto;
+   transition: .5s ease;
+   backface-visibility: hidden;
+ }
+
+ .middle {
+   transition: .5s ease;
+   opacity: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%)
+ }
+
+ .container-img:hover .image {
+   opacity: 0.3;
+ }
+
+ .container-img:hover .middle {
+   opacity: 1;
+ }
+
+/* --------------------------
+Team
+-------------------------- */
+.team {
+  background: #fff;
+  padding: 60px 0;
+}
+.team .member {
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.5);
+  transition: 0.3s;
+}
+.team .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+.team .member .member-img:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: url(../img/team-shape.svg) no-repeat center bottom;
+  background-size: contain;
+  z-index: 1;
+}
+.team .member .member-info {
+  padding: 10px 15px 20px 15px;
+}
+.team .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #012970;
+}
+.team .member .member-info span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+.team .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  padding-top: 15px;
+  line-height: 26px;
+  color: #5e5e5e;
+}
+.team .member:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+/*------------------------
+Contact
+------------------------*/
+.card-css {
+  border: 1px solid;
+  padding: 10px;
+  height: 225px;
+  box-shadow: 5px 10px #888888;
+}
+
+.icon {
+  font-size: 50px;
+  color: black;
+}
+ /*---------------------------
+ Footer
+ -------------------------------*/
+ .footer {
+   background-image: linear-gradient(to bottom right, #007acc, #0099ff, #33adff);
+   color: white;
+   font-size: 14px;
+   text-align: center;
+ }
+
+ .footer h3 {
+   font-size: 36px;
+   font-weight: 700;
+   position: relative;
+   font-family: "Poppins", sans-serif;
+   padding: 0;
+ }
+
+ .footer .social-links a {
+   font-size: 18px;
+   display: inline-block;
+   background: #1affff;
+   color: #fff;
+   line-height: 1;
+   padding: 8px 0;
+   margin-right: 4px;
+   border-radius: 50%;
+   text-align: center;
+   width: 36px;
+   height: 36px;
+   transition: 0.3s;
+ }
+
+ .footer .social-links a:hover {
+   background: white;
+   color: black;
+   text-decoration: none;
+ }
+
+ .bot a {
+   font-size:25px;
+   font-weight: 600;
+   text-decoration: none;
+   color: white;
+ }
